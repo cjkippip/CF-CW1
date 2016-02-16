@@ -45,25 +45,23 @@
 % A=[1 2 3;4 5 6;7 8 9];
 % B=A(:,[1 2 3]);
 %%
-% C=[2 1.5;1.5 2];
-% m=[0;0];
-% A = chol(C);
-% data=mvnrnd(m,C,10000);
-% figure(21),clf
-% plot(data(:,1),data(:,2),'x');
-% 
-% figure(22),clf
-% data2=data*inv(A);
-% plot(data2(:,1),data2(:,2),'x');
+C=[2 1.5;1.5 2];
+m=[0;0];
+A = chol(C);
+data=mvnrnd(m,C,1000);
+figure(21),clf
+plot(data(:,1),data(:,2),'x');
+
+figure(22),clf
+data2=data*inv(A);
+plot(data2(:,1),data2(:,2),'x');
 %%
-% m=0;
-% c=1000;
-% data=linspace(-1,1,100000);
-% 
-% figure(23),clf,
-% hist(data,100);
-% 
-% data2=data*c;
-% figure(24),clf,
-% hist(data2,10000);
+m=0;
+c=1/2;
+data=rand(1000);
+%%
+figure(23),clf,
+plot(data);
+
+
 

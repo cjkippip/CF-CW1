@@ -27,7 +27,7 @@ minimize( norm(dataR_FTSE_Half-dataR_Half*w) + tau*norm(w,1) )
 subject to
     w'*ones(N,1) == 1;
 %     w'*m == rho;
-%     w >= 0;
+    w >= 0;
 cvx_end
 figure(9), clf, bar(w); 
 grid on

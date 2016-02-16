@@ -77,7 +77,7 @@ dataR=[dataNum1(1:700,7) dataNum2(1:700,7) dataNum3(1:700,7)...
 %%
 dataFTSE=importdata('DATA/FTSE100.csv');
 dataFTSENum=dataFTSE.data;
-dataR_FTSE=dataFTSENum(1:700,7);
+dataFTSER
 
 
 

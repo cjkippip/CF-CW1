@@ -3,17 +3,18 @@
 
 load dataR.mat
 dataR=flipud(dataR);
-L=length(dataR(:,1));
-dataRHalf=dataR(1:round(L/2),:);
-dataRRest=dataR(round(L/2)+1:end,:);
+T=length(dataR(:,1));
+T=T/2;
+dataRHalf=dataR(1:round(T),:);
+dataRRest=dataR(round(T)+1:end,:);
 R=dataRHalf(:,[1 2 3]);
 %%
-% Q2(1)***********************************************************
+% Q2(1)************************************************
 m=mean(R)';
 C=cov(R);
 
 %%
-% Q2(2)***********************************************************
+% Q2(2)************************************************
 NAssets=length(m);
 V0 = zeros(NAssets, 1);
 V1 = ones(1, NAssets);
@@ -24,7 +25,7 @@ plotFrontier(p);
 title('Efficient Frontier','FontSize',12);
 
 %%
-% Q2(3)***********************************************************
+% Q2(3)************************************************
 portSimp=[1/3 1/3 1/3]';
 PESimp=m'*portSimp;
 PVSimp=sqrt(portSimp'*C*portSimp);
