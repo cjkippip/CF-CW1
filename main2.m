@@ -1,6 +1,5 @@
 % Computational Finance CW1
 % Question 2
-
 load dataR.mat
 dataR=flipud(dataR);
 T=length(dataR(:,1));
@@ -20,7 +19,7 @@ V0 = zeros(NAssets, 1);
 V1 = ones(1, NAssets);
 p = Portfolio('mean', m, 'covar', C, ...
     'ae', V1, 'be', 1, 'lb', V0);
-figure(6),clf,
+figure(1),clf,
 plotFrontier(p);
 title('Efficient Frontier','FontSize',12);
 
@@ -29,7 +28,7 @@ title('Efficient Frontier','FontSize',12);
 portSimp=[1/3 1/3 1/3]';
 PESimp=m'*portSimp;
 PVSimp=sqrt(portSimp'*C*portSimp);
-figure(7),clf,
+figure(2),clf,
 plotFrontier(p);
 title('Efficient Frontier','FontSize',12);
 hold on
