@@ -66,4 +66,24 @@
 % data2=data*c;
 % figure(24),clf,
 % hist(data2,10000);
+%%
+load FundMarketCash 
+Returns = tick2ret(TestData);
+Riskless = mean(Returns(:,3));
+Sharpe = sharpe(Returns, Riskless);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

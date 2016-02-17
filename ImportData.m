@@ -1,6 +1,5 @@
 % Computational Finance CW1
 % Import data
-
 data1=importdata('DATA/AAL.csv');
 data2=importdata('DATA/ABF.csv');
 data3=importdata('DATA/ADM.csv');

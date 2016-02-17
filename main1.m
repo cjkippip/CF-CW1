@@ -40,7 +40,6 @@ plot3([0,0],[1,0],[0,1],'m','LineWidth',2);
 plot3(PWts(:,1),PWts(:,2),PWts(:,3),'b','LineWidth',3);
 grid on
 hold off
-
 %%
 % Q1(b)************************************************
 m1=[0.20;0.15];
@@ -60,7 +59,7 @@ p2 = Portfolio('mean', m2, 'covar', C2, ...
 'ae', V1(1,1:2), 'be', 1, 'lb', V0(1:2,1));
 p3 = Portfolio('mean', m3, 'covar', C3, ...
 'ae', V1(1,1:2), 'be', 1, 'lb', V0(1:2,1));
-figure(2),clf,
+figure(3),clf,
 subplot(221)
 plotFrontier(p);
 title('Efficient Frontier(3-asset)','FontSize',12);
