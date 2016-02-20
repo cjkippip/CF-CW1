@@ -24,7 +24,7 @@ V1 = ones(1, N);
 pHalf = Portfolio('mean', m1, 'covar', C1, ...
     'ae', V1, 'be', 1, 'lb', V0);
 figure(1),clf,
-plotFrontier(pHalf);
+plotFrontier(pHalf); 
 title('Efficient Frontier','FontSize',12);
 %%
 % Q2(3)************************************************
@@ -39,16 +39,25 @@ PVMaxRest=sqrt(weights'*C2*weights);
 PortReturn = [PESimpRest; PEMaxRest];
 PortRisk = [PVSimpRest; PVMaxRest];
 
-RiskThreshold = 0.10;
+RiskThreshold = 0.2;
 PortValue = [1000000;1000000];
 ValueAtRisk = portvrisk(PortReturn,PortRisk,...
 RiskThreshold,PortValue);
+%%
+figure(2),clf,
+x=[1 2];
+bar(x,ValueAtRisk',0.3);
+title('Comparison of VaR','FontSize',12);
+xlabel('portfolio(max Sharpe)          simple 1/N',...
+    'FontSize',12,'FontWeight','bold');
+ylabel('Value at Risk','FontSize',12,'FontWeight','bold');
+grid on
 %%
 % portSimp=[1/3 1/3 1/3]';
 % PESimpHalf=m1'*portSimp;
 % PVSimpHalf=sqrt(portSimp'*C1*portSimp);
 % 
-% figure(2),clf,
+% figure(3),clf,
 % plotFrontier(pHalf);
 % title('Efficient Frontier','FontSize',12);
 % hold on
@@ -62,7 +71,7 @@ RiskThreshold,PortValue);
 % PESimpRest=m2'*portSimp;
 % PVSimpRest=sqrt(portSimp'*C2*portSimp);
 % 
-% figure(3),clf,
+% figure(4),clf,
 % plotFrontier(pRest);
 % title('Efficient Frontier','FontSize',12);
 % hold on
@@ -71,8 +80,6 @@ RiskThreshold,PortValue);
 % grid on
 % hold off
 %%
-
-
 
 
 
