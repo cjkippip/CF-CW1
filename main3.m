@@ -20,7 +20,26 @@ dataR_FTSE_Rest=100*dataR_FTSE(round(T)+1:end,:);
 
 %%
 % Q3(a)************************************************
-
+flag=0;
+wgts=eye(30,30);
+greedyWgts=zeros(30,6);
+for i=1:6
+    score=norm(dataR_FTSE_Half-dataR_Half*wgts(:,1));
+    wgt=wgts(:,1);
+    indx=1;
+    for j=1:N-flag
+        score1=norm(dataR_FTSE_Half-dataR_Half*wgts(:,j));
+        weight1=wgts(:,j);
+        if score1<score
+            score=score1;
+            wgt=weight1;
+            indx=j;
+        end
+    end
+    wgts(:,indx)=[];
+    greedyWgts(:,i)=wgt;
+    flag=flag+1;
+end
 
 %%
 % Q3(b)************************************************
@@ -40,6 +59,8 @@ for i=1:Division
     weights(:,i)=w;
 end  
 %%
+load main3data.mat
+%%
 figure(1),clf,
 plot(tRange,numNoZero,'r','LineWidth',2);
 grid on
@@ -47,15 +68,21 @@ grid on
 % num=length(WIndx);
 % disp(num);
 %%
-% tau=1.6162;
-% cvx_begin quiet
-% variable w(N)
-% minimize( norm(dataR_FTSE_Half-dataR_Half*w) + tau*norm(w,1) )
-% cvx_end
-% [WIndx]=find(abs(w) > 1e-5);
+tau=1.5;
+cvx_begin quiet
+variable w(N)
+minimize( norm(dataR_FTSE_Half-dataR_Half*w) + tau*norm(w,1) )
+cvx_end
+[WIndx]=find(abs(w) > 1e-5);
 
-% figure(2), clf, bar(w); 
-% grid on
+figure(2), clf, bar(w); 
+grid on
+
+
+
+
+
+
 
 
 

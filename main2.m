@@ -6,8 +6,11 @@ T=length(dataR(:,1));
 T=T/2;% half time
 dataRHalf=dataR(1:round(T),:);% first half
 dataRRest=dataR(round(T)+1:end,:);% the rest 
-R1=dataRHalf(:,[1 2 3]);% select 3 stocks
-R2=dataRRest(:,[1 2 3]);
+aa=round(9*rand)+1;
+bb=round(9*rand)+11;
+cc=round(9*rand)+21;
+R1=dataRHalf(:,[aa bb cc]);% select 3 stocks
+R2=dataRRest(:,[aa bb cc]);
 %%
 % Q2(1)************************************************
 % m and C of first half part
@@ -28,13 +31,14 @@ plotFrontier(pHalf);
 title('Efficient Frontier','FontSize',12);
 %%
 % Q2(3)************************************************
-portSimp=[1/3 1/3 1/3]';% 1/N portfolio
-weights=estimateMaxSharpeRatio(pHalf);% the portfolio has max sharpe ratio
+Simp=[1/3 1/3 1/3]';% 1/N portfolio
+% the portfolio has max sharpe ratio
+MSRweight=estimateMaxSharpeRatio(pHalf);
 
-PESimpRest=m2'*portSimp;
-PVSimpRest=sqrt(portSimp'*C2*portSimp);
-PEMaxRest=m2'*weights;
-PVMaxRest=sqrt(weights'*C2*weights);
+PESimpRest=m2'*Simp;
+PVSimpRest=sqrt(Simp'*C2*Simp);
+PEMaxRest=m2'*MSRweight;
+PVMaxRest=sqrt(MSRweight'*C2*MSRweight);
 
 PortReturn = [PESimpRest; PEMaxRest];
 PortRisk = [PVSimpRest; PVMaxRest];
@@ -51,6 +55,26 @@ title('Comparison of VaR','FontSize',12);
 xlabel('portfolio(max Sharpe)          simple 1/N',...
     'FontSize',12,'FontWeight','bold');
 ylabel('Value at Risk','FontSize',12,'FontWeight','bold');
+grid on
+%%
+pwgt=estimateFrontier(pHalf);
+trainPortMeans=m1'*pwgt;
+testPortMeans=m2'*pwgt;
+trainSimpMean=Simp'*m1;
+testSimpMean=Simp'*m2;
+trainMeans=[trainPortMeans trainSimpMean];
+testMeans=[testPortMeans testSimpMean];
+
+figure(3),clf,
+bar(trainMeans);
+title('Performance on training data(first half)','FontSize',13);
+ylabel('Expected Returen','FontSize',15,'FontWeight','bold');
+grid on
+
+figure(4),clf,
+bar(testMeans);
+title('Performance on test data(rest)','FontSize',13);
+ylabel('Expected Returen','FontSize',15,'FontWeight','bold');
 grid on
 %%
 % portSimp=[1/3 1/3 1/3]';

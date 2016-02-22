@@ -42,13 +42,20 @@ for i=1:10
     ValueAtRisk(i,:) = portvrisk(PortReturn,PortRisk,...
     RiskThreshold,PortValue);
 end
+%%
 xx=linspace(1,10,10);
 figure(5),clf,
 bar(xx,ValueAtRisk);
+title('Comparison of VaR(RiskThreshold=0.2, PortValue=1*10^6)','FontSize',13);
+xlabel('different 3-asset','FontSize',15,'FontWeight','bold');
+ylabel('Value at Risk','FontSize',15,'FontWeight','bold');
 grid on
 figure(6),clf,
 plot(xx,ValueAtRisk(:,1),'b',xx,ValueAtRisk(:,2),'r','LineWidth',2);
 legend('portfolio(max Sharpe)','simple 1/N');
+title('Comparison of VaR(RiskThreshold=0.2, PortValue=1*10^6)','FontSize',13);
+xlabel('different 3-asset','FontSize',15,'FontWeight','bold');
+ylabel('Value at Risk','FontSize',15,'FontWeight','bold');
 grid on
 
 
