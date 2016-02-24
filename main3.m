@@ -40,6 +40,8 @@ for i=1:6
     greedyWgts(:,i)=wgt;
     flag=flag+1;
 end
+%%
+[row,col] = find(greedyWgts>0);
 
 %%
 % Q3(b)************************************************
@@ -61,7 +63,7 @@ end
 %%
 load main3data.mat
 %%
-figure(1),clf,
+figure(2),clf,
 plot(tRange,numNoZero,'r','LineWidth',2);
 grid on
 % [WIndx]=find(abs(weights(:,33)) > 1e-5);
@@ -75,7 +77,7 @@ minimize( norm(dataR_FTSE_Half-dataR_Half*w) + tau*norm(w,1) )
 cvx_end
 [WIndx]=find(abs(w) > 1e-5);
 
-figure(2), clf, bar(w); 
+figure(3), clf, bar(w); 
 grid on
 
 
