@@ -65,6 +65,9 @@ load main3data.mat
 %%
 figure(2),clf,
 plot(tRange,numNoZero,'r','LineWidth',2);
+title('adjustment of parameter tau','FontSize',15)
+xlabel('tau','FontSize',13,'FontWeight','bold')
+ylabel('number of nonzero weights','FontSize',13,'FontWeight','bold')
 grid on
 % [WIndx]=find(abs(weights(:,33)) > 1e-5);
 % num=length(WIndx);
@@ -77,10 +80,29 @@ minimize( norm(dataR_FTSE_Half-dataR_Half*w) + tau*norm(w,1) )
 cvx_end
 [WIndx]=find(abs(w) > 1e-5);
 
-figure(3), clf, bar(w); 
+figure(3), clf, bar(abs(w)); 
+title('Nonzero weights','FontSize',15)
+xlabel('weight index','FontSize',13,'FontWeight','bold')
+ylabel('weight','FontSize',13,'FontWeight','bold')
 grid on
+%%
+R1=dataR(1:round(T),WIndx);% select 6 stocks
+R2=dataR(round(T)+1:end,WIndx);
+% m and C of first half part
+m1=mean(R1)';
+C1=cov(R1);
+% m and C of the rest part
+m2=mean(R2)';
+C2=cov(R2);
+N=length(m1);% number of assets
 
-
+V0 = zeros(N, 1);
+V1 = ones(1, N);
+pHalf = Portfolio('mean', m1, 'covar', C1, ...
+    'ae', V1, 'be', 1, 'lb', V0);
+figure(4),clf,
+plotFrontier(pHalf); 
+title('Efficient Frontier','FontSize',12);
 
 
 
